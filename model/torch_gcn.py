@@ -47,7 +47,7 @@ class GCNTorch(nn.Module):
                  n_layers,
                  activation,
                  dropout):
-        super(GCN, self).__init__()
+        super(GCNTorch, self).__init__()
         self.layers = nn.ModuleList()
         # input layer
         self.layers.append(gnn.GCNConv(in_feats, n_hidden))
