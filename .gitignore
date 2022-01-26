@@ -1,4 +1,6 @@
 */__pycache__
-checkpoints
+checkpoint/*
 data/ind.*
 data/corpus/*
+data/20ng*
+data/*
