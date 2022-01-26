@@ -89,7 +89,7 @@ class BertGAT(th.nn.Module):
 
 class BertGCNTorch(th.nn.Module):
     def __init__(self, pretrained_model='roberta_base', nb_class=20, m=0.7, gcn_layers=2, n_hidden=200, dropout=0.5):
-        super(BertGCN, self).__init__()
+        super(BertGCNTorch, self).__init__()
         self.m = m
         self.nb_class = nb_class
         self.tokenizer = AutoTokenizer.from_pretrained(pretrained_model)
