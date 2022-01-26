@@ -301,5 +301,4 @@ def log_training_results(trainer):
 
 log_training_results.best_val_acc = 0
 g = update_feature()
-print(g)
-# trainer.run(idx_loader, max_epochs=nb_epochs)
+trainer.run(idx_loader, max_epochs=nb_epochs)

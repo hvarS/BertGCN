@@ -101,12 +101,13 @@ class BertGCNTorch(th.nn.Module):
             n_hidden=n_hidden,
             n_classes=nb_class,
             n_layers=gcn_layers-1,
-            activation=F.elu,
+            activation=th.nn.ELU,
             dropout=dropout
         )
+        
 
     def forward(self, g, idx):
-        input_ids, attention_mask = g.input_ids[idx], g.attention_mask[idx]
+        input_ids, attention_mask = g.input_ids[idx], g.attention_masks[idx]
         if self.training:
             cls_feats = self.bert_model(input_ids, attention_mask)[0][:, 0]
             g.x[idx] = cls_feats

@@ -48,14 +48,16 @@ class GCNTorch(nn.Module):
                  activation,
                  dropout):
         super(GCNTorch, self).__init__()
+        self.dropout = nn.Dropout(p=dropout)
         self.layers = nn.ModuleList()
-        # input layer
         self.layers.append(gnn.GCNConv(in_feats, n_hidden))
-        self.layers.append(activation)
+        self.layers.append(activation())
+        self.dropout = nn.Dropout(p=dropout)
         # hidden layers
         for _ in range(n_layers - 1):
             self.layers.append(gnn.GCNConv(n_hidden, n_hidden))
-            self.layers.append(activation)
+            self.layers.append(activation())
+            self.layers.append(self.dropout)
         # output layer
         self.layers.append(gnn.GCNConv(n_hidden, n_classes))
         self.dropout = nn.Dropout(p=dropout)
@@ -63,11 +65,9 @@ class GCNTorch(nn.Module):
     def forward(self, features, edge_index, edge_weight):
         h = features
         for i, layer in enumerate(self.layers):
-            if i%2 == 1:
-                h = layer(h)
-                h = self.dropout(h)
-            elif i==0:
+            print(h.device,edge_index.device,edge_weight.device)
+            if i%3==0:
                 h = layer(h,edge_index =edge_index,edge_weight=edge_weight)
             else:
-                h = layer(h,edge_index =edge_index,edge_weight=edge_weight)
+                h = layer(h) 
         return h
