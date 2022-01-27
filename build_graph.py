@@ -61,7 +61,7 @@ train_ids = []
 for train_name in doc_train_list:
     train_id = doc_name_list.index(train_name)
     train_ids.append(train_id)
-print(train_ids)
+# print(train_ids)
 random.shuffle(train_ids)
 
 # partial labeled data
